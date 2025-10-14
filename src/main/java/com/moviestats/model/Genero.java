@@ -1,6 +1,8 @@
 package com.moviestats.model;
 
 import java.util.List;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +36,7 @@ public class Genero {
     private long idGenero;
 
     /** Nombre del género cinematográfico (ej: Acción, Drama, Comedia) */
+    @Column(length = 50, unique = true)
     private String nombre;
 
     /** Lista de películas asociadas a este género (relación inversa muchos-a-muchos) */
