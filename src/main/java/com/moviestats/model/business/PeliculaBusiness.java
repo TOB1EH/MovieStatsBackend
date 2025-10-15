@@ -98,7 +98,7 @@ public class PeliculaBusiness implements IPeliculaBusiness {
         Optional<Pelicula> r;
 
         try {
-            r = peliculaDAO.findBypelicula(pelicula);
+            r = peliculaDAO.findByNombre(pelicula);
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).build();
@@ -159,7 +159,7 @@ public class PeliculaBusiness implements IPeliculaBusiness {
         Optional<Pelicula> nombreExistente = null;
 
         try {
-            nombreExistente = peliculaDAO.findBypeliculaAndIdNot(pelicula.getNombre(), pelicula.getIdPelicula());
+            nombreExistente = peliculaDAO.findByNombreAndIdNot(pelicula.getNombre(), pelicula.getIdPelicula());
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).build();

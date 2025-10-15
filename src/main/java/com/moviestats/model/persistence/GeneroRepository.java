@@ -32,8 +32,8 @@ public interface GeneroRepository extends JpaRepository<Genero, Long> {
      * @param genero Nombre o descripción del genero a buscar.
      * @return {@link Optional} que contiene el genero si se encuentra, o vacío si no existe.
      */
-    @Query("SELECT g FROM genre g WHERE g.name = :genero OR g.description = :genero")
-    Optional<Genero> findBygenero(@Param("genero") String genero);
+    @Query("SELECT g FROM Genero g WHERE g.nombre = :genero")
+    Optional<Genero> findByNombre(@Param("genero") String genero);
 
     /**
      * Busca un genero por su nombre, excluyendo un identificador específico.
@@ -43,7 +43,7 @@ public interface GeneroRepository extends JpaRepository<Genero, Long> {
      * @param id Identificador del genero a excluir de la búsqueda.
      * @return {@link Optional} que contiene el genero si se encuentra, o vacío si no existe.
      */
-    @Query("SELECT g FROM genre g WHERE (g.name = :genero OR g.description = :genero) AND g.id <> :id")
-    Optional<Genero> findBygeneroAndIdNot(@Param("genero") String genero, @Param("id") long id);
+    @Query("SELECT g FROM Genero g WHERE g.nombre = :genero AND g.idGenero <> :id")
+    Optional<Genero> findByNombreAndIdNot(@Param("genero") String genero, @Param("id") long id);
 
 }

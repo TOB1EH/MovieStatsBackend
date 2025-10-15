@@ -98,7 +98,7 @@ public class GeneroBusiness implements IGeneroBusiness {
         Optional<Genero> r;
 
         try {
-            r = generoDAO.findBygenero(genero);
+            r = generoDAO.findByNombre(genero);
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).build();
@@ -159,7 +159,7 @@ public class GeneroBusiness implements IGeneroBusiness {
         Optional<Genero> nombreExistente = null;
 
         try {
-            nombreExistente = generoDAO.findBygeneroAndIdNot(genero.getNombre(), genero.getIdGenero());
+            nombreExistente = generoDAO.findByNombreAndIdNot(genero.getNombre(), genero.getIdGenero());
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).build();

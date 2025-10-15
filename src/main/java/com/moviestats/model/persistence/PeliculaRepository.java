@@ -32,8 +32,8 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
      * @param pelicula Nombre o descripción del pelicula a buscar.
      * @return {@link Optional} que contiene el pelicula si se encuentra, o vacío si no existe.
      */
-    @Query("SELECT g FROM movie g WHERE g.name = :pelicula OR g.description = :pelicula")
-    Optional<Pelicula> findBypelicula(@Param("pelicula") String pelicula);
+    @Query("SELECT g FROM Pelicula  g WHERE g.nombre = :pelicula OR g.sinopsis = :pelicula")
+    Optional<Pelicula> findByNombre(@Param("pelicula") String pelicula);
 
     /**
      * Busca un pelicula por su nombre, excluyendo un identificador específico.
@@ -43,7 +43,7 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
      * @param id Identificador del pelicula a excluir de la búsqueda.
      * @return {@link Optional} que contiene el pelicula si se encuentra, o vacío si no existe.
      */
-    @Query("SELECT g FROM movie g WHERE (g.name = :pelicula OR g.description = :pelicula) AND g.id <> :id")
-    Optional<Pelicula> findBypeliculaAndIdNot(@Param("pelicula") String pelicula, @Param("id") long id);
+    @Query("SELECT g FROM Pelicula  g WHERE (g.nombre = :pelicula OR g.sinopsis = :pelicula) AND g.idPelicula <> :id")
+    Optional<Pelicula> findByNombreAndIdNot(@Param("pelicula") String pelicula, @Param("id") long id);
 
 }

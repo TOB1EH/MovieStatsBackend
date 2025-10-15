@@ -1,6 +1,8 @@
 package com.moviestats.model;
 
 import java.util.List;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +33,7 @@ public class Genero {
     /** Identificador único del género, generado automáticamente por la base de datos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_genero")
     private long idGenero;
 
     /** Nombre del género cinematográfico (ej: Acción, Drama, Comedia) */
