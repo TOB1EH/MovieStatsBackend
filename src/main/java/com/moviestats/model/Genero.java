@@ -37,6 +37,7 @@ public class Genero {
     private long idGenero;
 
     /** Nombre del género cinematográfico (ej: Acción, Drama, Comedia) */
+    @Column(length = 50, unique = true)
     private String nombre;
 
     /** Lista de películas asociadas a este género (relación inversa muchos-a-muchos) */
