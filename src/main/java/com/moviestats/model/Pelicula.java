@@ -35,6 +35,7 @@ public class Pelicula {
     /** Identificador único de la película, generado automáticamente por la base de datos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_pelicula")
     private long idPelicula;
 
     /** Título de la película (máximo 100 caracteres) */
