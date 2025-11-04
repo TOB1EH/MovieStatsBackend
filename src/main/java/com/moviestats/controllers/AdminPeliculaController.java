@@ -23,7 +23,7 @@ import com.moviestats.model.business.exceptions.*;
  * Ruta: /api/v1/peliculas
  */
 @RestController
-@RequestMapping("/api/v1/peliculas")
+@RequestMapping("/api/v1/pelicula")
 public class AdminPeliculaController {
 
     @Autowired

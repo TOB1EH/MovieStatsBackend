@@ -20,7 +20,7 @@ public class Constants {
      */
     public static final String URL_BASE = URL_API + URL_API_VERSION;
 
-    
+    public static final String URL_MOVIES2 = URL_BASE + "/peliculas";
     public static final String URL_MOVIES = URL_BASE + "/pelicula";
 
 }
