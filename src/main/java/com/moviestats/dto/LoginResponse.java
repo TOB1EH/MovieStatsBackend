@@ -24,7 +24,7 @@ import lombok.Getter;
  * }
  * </pre>
  * @version 1.0
- * @see com.moviestats.controller.AuthController
+ * @see com.moviestats.controllers.AuthController
  */
 @Getter
 @AllArgsConstructor

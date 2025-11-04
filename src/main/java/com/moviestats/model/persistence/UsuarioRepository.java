@@ -1,4 +1,4 @@
-package com.moviestats.repository;
+package com.moviestats.model.persistence;
 
 import com.moviestats.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;

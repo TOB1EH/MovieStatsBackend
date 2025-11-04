@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.moviestats.dto.PeliculaDTO;
+import com.moviestats.dto.PeliculaDTO2;
 import com.moviestats.model.Genero;
 import com.moviestats.model.Pelicula;
 import com.moviestats.model.business.IPeliculaBusiness;
@@ -39,7 +39,7 @@ public class AdminPeliculaController {
     public ResponseEntity<?> list() {
         try {
             List<Pelicula> list = peliculaBusiness.list();
-            List<PeliculaDTO> dto = new ArrayList<>();
+            List<PeliculaDTO2> dto = new ArrayList<>();
             for (Pelicula p : list) {
                 dto.add(PeliculaMapper.toDto(p));
             }
@@ -51,7 +51,7 @@ public class AdminPeliculaController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> create(@RequestBody PeliculaDTO dto) {
+    public ResponseEntity<?> create(@RequestBody PeliculaDTO2 dto) {
         try {
             Pelicula p = PeliculaMapper.toEntity(dto);
 
@@ -70,7 +70,7 @@ public class AdminPeliculaController {
             }
 
             Pelicula created = peliculaBusiness.add(p);
-            PeliculaDTO out = PeliculaMapper.toDto(created);
+            PeliculaDTO2 out = PeliculaMapper.toDto(created);
             return ResponseEntity.status(HttpStatus.CREATED).body(out);
         } catch (FoundException e) {
             return new ResponseEntity<>(response.build(HttpStatus.FOUND, e, e.getMessage()), HttpStatus.FOUND);
@@ -81,7 +81,7 @@ public class AdminPeliculaController {
     }
 
     @PutMapping("")
-    public ResponseEntity<?> update(@RequestBody PeliculaDTO dto) {
+    public ResponseEntity<?> update(@RequestBody PeliculaDTO2 dto) {
         try {
             Pelicula p = PeliculaMapper.toEntity(dto);
 
@@ -99,7 +99,7 @@ public class AdminPeliculaController {
             }
 
             Pelicula updated = peliculaBusiness.update(p);
-            PeliculaDTO out = PeliculaMapper.toDto(updated);
+            PeliculaDTO2 out = PeliculaMapper.toDto(updated);
             return ResponseEntity.ok(out);
         } catch (NotFoundException e) {
             return new ResponseEntity<>(response.build(HttpStatus.NOT_FOUND, e, e.getMessage()), HttpStatus.NOT_FOUND);

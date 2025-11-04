@@ -2,7 +2,8 @@ package com.moviestats.service;
 
 import com.moviestats.dto.RegisterRequest;
 import com.moviestats.model.Usuario;
-import com.moviestats.repository.UsuarioRepository;
+import com.moviestats.model.persistence.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import java.util.Optional;
  * manipulación de información de usuarios, garantizando una separación
  * adecuada entre la lógica de negocio y la capa de persistencia.</p>
  *
- * @see com.moviestats.repository.UsuarioRepository
+ * @see com.moviestats.model.persistence.UsuarioRepository
  * @see com.moviestats.model.Usuario
  */
 @Service

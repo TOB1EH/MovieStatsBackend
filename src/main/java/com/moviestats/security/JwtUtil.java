@@ -28,7 +28,7 @@ import java.util.Date;
  * expuesta en el código fuente en entornos de producción. Se recomienda
  * almacenarla en variables de entorno o un servicio de configuración segura.</p>
  *
- * @see com.moviestats.controller.AuthController
+ * @see com.moviestats.controllers.AuthController
  * @see com.moviestats.model.Usuario
  */
 @Component

@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import com.moviestats.dto.PeliculaDTO;
+import com.moviestats.dto.PeliculaDTO2;
 import com.moviestats.model.Genero;
 import com.moviestats.model.Pelicula;
 
@@ -15,9 +15,9 @@ public final class PeliculaMapper {
 
     private PeliculaMapper() {}
 
-    public static PeliculaDTO toDto(Pelicula p) {
+    public static PeliculaDTO2 toDto(Pelicula p) {
         if (p == null) return null;
-        PeliculaDTO dto = new PeliculaDTO();
+        PeliculaDTO2 dto = new PeliculaDTO2();
         dto.setId(p.getIdPelicula());
         dto.setTitle(p.getNombre());
         if (p.getFechaSalida() != null) {
@@ -39,7 +39,7 @@ public final class PeliculaMapper {
      * Convierte DTO a entidad parcial. No setea la lista de Genero completa:
      * el controller se encarga de resolver/crear el Genero y asignarlo.
      */
-    public static Pelicula toEntity(PeliculaDTO dto) {
+    public static Pelicula toEntity(PeliculaDTO2 dto) {
         if (dto == null) return null;
         Pelicula p = new Pelicula();
         if (dto.getId() != null) p.setIdPelicula(dto.getId());
