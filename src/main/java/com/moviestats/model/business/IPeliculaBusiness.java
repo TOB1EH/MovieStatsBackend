@@ -1,6 +1,7 @@
 package com.moviestats.model.business;
 import java.util.List;
 
+import com.moviestats.dto.PeliculaPageDTO;
 import com.moviestats.model.Pelicula;
 import com.moviestats.model.business.exceptions.*;
 
@@ -71,6 +72,19 @@ public interface IPeliculaBusiness {
      * @throws NotFoundException Si el pelicula a eliminar no existe.
      */
     public void delete(Long id) throws BusinessException, NotFoundException;
+
+    /**
+     * Lista películas con paginación y filtros básicos.
+     * @param page número de página (1-based)
+     * @param size tamaño de página
+     * @param q texto de búsqueda en el nombre
+     * @param genre filtro por nombre de género
+     * @param year filtro por año de estreno
+     * @param minRating filtro por puntuación mínima
+     * @return un objeto que contiene la lista y el total
+     * @throws BusinessException en caso de error
+     */
+    public PeliculaPageDTO listPaged(int page, int size, String q, String genre, Integer year, Float minRating) throws BusinessException;
 
 
 }
