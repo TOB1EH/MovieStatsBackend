@@ -3,6 +3,7 @@ package com.moviestats.model.business;
 import com.moviestats.model.Pelicula;
 
 import com.moviestats.model.persistence.PeliculaRepository;
+import com.moviestats.model.persistence.VotoRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +55,7 @@ public class PeliculaBusiness implements IPeliculaBusiness {
     @Override
     public List<Pelicula> list() throws BusinessException {
         try {
-            return peliculaDAO.findAll();
+            return peliculaDAO.findAllWithAvgAndCount();
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).message(e.getMessage()).build();
@@ -75,6 +76,7 @@ public class PeliculaBusiness implements IPeliculaBusiness {
 
         try {
             r = peliculaDAO.findById(id);
+            
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).build();

@@ -1,7 +1,7 @@
 package com.moviestats.model.persistence;
 
 import java.util.Optional;
-
+import java.util.List;
 import com.moviestats.model.Pelicula;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -43,7 +43,25 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
      * @param id Identificador del pelicula a excluir de la búsqueda.
      * @return {@link Optional} que contiene el pelicula si se encuentra, o vacío si no existe.
      */
-    @Query("SELECT g FROM Pelicula  g WHERE (g.nombre = :pelicula OR g.sinopsis = :pelicula) AND g.idPelicula <> :id")
+    @Query("SELECT g FROM Pelicula  g WHERE g.nombre = :pelicula AND g.idPelicula <> :id")
     Optional<Pelicula> findByNombreAndIdNot(@Param("pelicula") String pelicula, @Param("id") long id);
+
+
+    @Query("""
+        SELECT new com.moviestats.model.Pelicula(
+            p.nombre, 
+            p.idPelicula, 
+            p.imagen, 
+            p.fechaSalida, 
+            COALESCE(AVG(v.numero_voto), 0), 
+            COUNT(v)
+        )
+        FROM Pelicula p
+        LEFT JOIN Voto v ON v.pelicula = p
+        GROUP BY p.idPelicula
+    """)
+    List<Pelicula> findAllWithAvgAndCount();
+
+
 
 }

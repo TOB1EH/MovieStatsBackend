@@ -32,6 +32,17 @@ import lombok.Setter;
 @Setter
 public class Pelicula {
 
+    public Pelicula(String nombre, long idPelicula, String imagen, Date fechaSalida, Double puntuacion, Long votos) {
+        this.nombre = nombre;
+        this.idPelicula = idPelicula;
+        this.imagen = imagen;
+        this.fechaSalida = fechaSalida;
+        this.puntuacion = puntuacion;
+        this.votos = votos;
+    }
+
+
+
     /** Identificador único de la película, generado automáticamente por la base de datos */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,10 +73,10 @@ public class Pelicula {
     private Date fechaSalida;
 
     /** Puntuación promedio calculada de la película */
-    private float puntuacion;
+    private Double puntuacion;
 
     /** Número total de votos recibidos por la película */
-    private int votos;
+    private Long votos;
 
     /** URL o ruta de la imagen del póster de la película */
     private String imagen;
