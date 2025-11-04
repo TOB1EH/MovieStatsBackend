@@ -1,4 +1,4 @@
-package com.moviestats.controller;
+package com.moviestats.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,6 @@ import java.util.Map;
 import com.moviestats.dto.LoginRequest;
 import com.moviestats.dto.LoginResponse;
 import com.moviestats.security.JwtUtil;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
