@@ -9,6 +9,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+
+import com.moviestats.dto.PeliculaDTO;
+import com.moviestats.dto.PeliculaPageDTO;
+
+import java.util.ArrayList;
+
+import com.moviestats.model.Genero;
 
 import com.moviestats.model.business.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
@@ -194,5 +204,41 @@ public class PeliculaBusiness implements IPeliculaBusiness {
         }
     }
     
+    @Override
+    public PeliculaPageDTO listPaged(int page, int size, String q, String genre, Integer year, Float minRating) throws BusinessException {
+        try {
+            Pageable pageable = PageRequest.of(Math.max(0, page - 1), Math.max(1, size));
+            Page<Pelicula> p = peliculaDAO.findByFilters(
+                (q != null && !q.isBlank()) ? q : "",
+                (genre != null && !genre.isBlank() && !"Todos".equalsIgnoreCase(genre)) ? genre : "",
+                year,
+                minRating,
+                pageable
+            );
+
+            List<PeliculaDTO> dtos = new ArrayList<>();
+            for(Pelicula e : p.getContent()) {
+                PeliculaDTO dto = new PeliculaDTO();
+                dto.setId(e.getIdPelicula());
+                dto.setTitle(e.getNombre());
+                if(e.getFechaSalida() != null) dto.setYear(e.getFechaSalida().toLocalDate().getYear());
+                else dto.setYear(null);
+                dto.setRating(e.getPuntuacion());
+                dto.setPoster(e.getImagen());
+                dto.setOverview(e.getSinopsis());
+                if(e.getGenero() != null) {
+                    List<String> genres = new ArrayList<>();
+                    for(Genero g : e.getGenero()) genres.add(g.getNombre());
+                    dto.setGenres(genres);
+                }
+                dtos.add(dto);
+            }
+
+            return new PeliculaPageDTO(dtos, p.getTotalElements());
+        } catch(Exception e) {
+            log.error(e.getMessage(), e);
+            throw BusinessException.builder().ex(e).build();
+        }
+    }
 }
 

@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.moviestats.dto.PeliculaPageDTO;
 import com.moviestats.model.Pelicula;
 import com.moviestats.model.business.exceptions.*;
 
@@ -54,9 +56,22 @@ public class PeliculaRestController {
      *         - {@link HttpStatus#INTERNAL_SERVER_ERROR} si ocurre un {@link BusinessException}.
      */
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> list() {
+    public ResponseEntity<?> list(
+        @RequestParam(value = "q", required = false) String q,
+        @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+        @RequestParam(value = "size", required = false, defaultValue = "8") int size,
+        @RequestParam(value = "genre", required = false) String genre,
+        @RequestParam(value = "year", required = false) Integer year,
+        @RequestParam(value = "minRating", required = false) Float minRating
+    ) {
         try {
-            return new ResponseEntity<>(peliculaBusiness.list(), HttpStatus.OK);
+            // Si no hay parámetros aplicados devolvemos la lista completa para compatibilidad
+            boolean hasFilter = (q != null && !q.isBlank()) || (genre != null && !genre.isBlank()) || (year != null) || (minRating != null && minRating > 0f) || page > 1;
+            if(!hasFilter && size >= Integer.MAX_VALUE/2) {
+                return new ResponseEntity<>(peliculaBusiness.list(), HttpStatus.OK);
+            }
+            PeliculaPageDTO paged = peliculaBusiness.listPaged(page, size, q, genre, year, minRating);
+            return new ResponseEntity<>(paged, HttpStatus.OK);
         } catch(BusinessException e) {
             return new ResponseEntity<>(response.build(HttpStatus.INTERNAL_SERVER_ERROR, e, e.getMessage()),
              HttpStatus.INTERNAL_SERVER_ERROR);
