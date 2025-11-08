@@ -65,10 +65,10 @@ public class Pelicula {
     private Date fechaSalida;
 
     /** Puntuación promedio calculada de la película */
-    private float puntuacion;
+    private Float puntuacion;
 
     /** Número total de votos recibidos por la película */
-    private int votos;
+    private Integer votos;
 
     /** URL o ruta de la imagen del póster de la película (hasta 500 caracteres para URLs largas de TMDB) */
     @Column(length = 500)

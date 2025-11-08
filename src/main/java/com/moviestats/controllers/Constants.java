@@ -23,4 +23,6 @@ public class Constants {
     public static final String URL_MOVIES2 = URL_BASE + "/peliculas";
     public static final String URL_MOVIES = URL_BASE + "/pelicula";
 
+    public static final String URL_VOTOS = URL_BASE + "/voto";
+
 }
