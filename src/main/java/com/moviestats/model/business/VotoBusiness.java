@@ -1,18 +1,14 @@
 package com.moviestats.model.business;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.moviestats.dto.VotoDTO;
 import com.moviestats.model.Pelicula;
 import com.moviestats.model.Voto;
 import com.moviestats.model.business.exceptions.*;
 import com.moviestats.model.persistence.VotoRepository;
-
 import java.util.Optional;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service

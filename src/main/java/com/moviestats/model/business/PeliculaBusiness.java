@@ -3,24 +3,17 @@ package com.moviestats.model.business;
 import com.moviestats.model.Pelicula;
 
 import com.moviestats.model.persistence.PeliculaRepository;
-import com.moviestats.model.persistence.VotoRepository;
-
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
-
 import com.moviestats.dto.PeliculaDTO;
 import com.moviestats.dto.PeliculaPageDTO;
-
 import java.util.ArrayList;
-
 import com.moviestats.model.Genero;
-
 import com.moviestats.model.business.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 

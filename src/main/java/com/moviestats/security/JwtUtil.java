@@ -77,6 +77,7 @@ public class JwtUtil {
                 .claim("nombre", usuario.getNombre())
                 .claim("apellido", usuario.getApellido())
                 .claim("rol", usuario.getRol())
+                .claim("idUsuario", usuario.getIdUsuario())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(expiresAt))
                 .signWith(key); // Ya no se pasa algoritmo, se deduce por la clave

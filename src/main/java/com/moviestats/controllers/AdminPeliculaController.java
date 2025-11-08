@@ -20,10 +20,10 @@ import com.moviestats.model.business.exceptions.*;
 
 /**
  * Controller orientado a la vista Admin (endpoints que consume AdminView.vue).
- * Ruta: /api/v1/peliculas
+ * Ruta: /api/v1/admin/pelicula
  */
 @RestController
-@RequestMapping("/api/v1/pelicula")
+@RequestMapping(Constants.URL_MOVIES_ADMIN)
 public class AdminPeliculaController {
 
     @Autowired
