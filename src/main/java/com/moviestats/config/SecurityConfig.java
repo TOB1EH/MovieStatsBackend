@@ -16,7 +16,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import java.util.List;
 
 /**
- * Configuración de seguridad unificada para la aplicación MovieStats.
+ * SecurityConfig (desarrollo): permite todo en /api/v1/** y configura CORS para todos los orígenes.
+ * Nota: NO dejar así en producción.
  */
 @Configuration
 @EnableWebSecurity
@@ -26,42 +27,33 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // Habilita CORS para que Spring Security respete la configuración de CORS
             .cors().and()
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authz -> authz
-                // Permitir preflight OPTIONS
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                // si quieres permitir todo /api/v1 puedes mantener la siguiente línea
-                .requestMatchers("/api/auth/**").permitAll()           // Autenticación pública
-                .requestMatchers("/api/v1/pelicula/**").permitAll()    // Películas públicas
-                .requestMatchers("/api/v1/genero/**").permitAll()      // Géneros públicos
-                .requestMatchers("/api/v1/tmdb/**").permitAll()        // TMDB sync endpoints públicos
+                // permitir todo para /api/v1 durante desarrollo
                 .requestMatchers("/api/v1/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/v1/voto/**").permitAll()
-                // .anyRequest().authenticated()                          // Resto requiere autenticación
+                // permitir OPTIONS (preflight)
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                // resto por defecto permitido (dev)
+                .anyRequest().permitAll()
             );
         return http.build();
     }
 
-    /**
-     * Bean para el encriptador de contraseñas BCrypt.
-     */
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     /**
-     * Fuente de configuración CORS utilizada por Spring Security.
-     * Ajusta allowedOrigin(s) según tus orígenes de frontend.
+     * CORS global para desarrollo: permite cualquier origen y headers.
      */
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        // permitir el origen del frontend (o usa config.addAllowedOriginPattern("*") en desarrollo)
-        config.setAllowedOrigins(List.of("http://localhost:5173"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // En desarrollo permitimos patrones abiertos (incluye "*") y credenciales si se necesita
+        config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
