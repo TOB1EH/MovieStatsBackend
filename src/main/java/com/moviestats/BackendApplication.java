@@ -2,6 +2,7 @@ package com.moviestats;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * Clase principal de la aplicación Spring Boot para MovieStats.
@@ -10,8 +11,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * La anotación @SpringBootApplication habilita la configuración automática de Spring Boot,
  * incluyendo el escaneo de componentes, configuración de JPA y configuración web.
+ * 
+ * La anotación @EnableAsync habilita la ejecución asíncrona de métodos, permitiendo
+ * sincronizaciones en segundo plano con TMDB.
  */
 @SpringBootApplication
+@EnableAsync
 public class BackendApplication {
 
 	/**

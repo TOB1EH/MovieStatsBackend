@@ -54,6 +54,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()           // Autenticación pública
                 .requestMatchers("/api/v1/pelicula/**").permitAll()    // Películas públicas
                 .requestMatchers("/api/v1/genero/**").permitAll()      // Géneros públicos
+                .requestMatchers("/api/v1/tmdb/**").permitAll()        // TMDB sync endpoints públicos
                 .anyRequest().authenticated()                          // Resto requiere autenticación
             );
         return http.build();
