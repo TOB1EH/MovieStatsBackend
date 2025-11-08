@@ -32,13 +32,14 @@ public class SecurityConfig {
             .authorizeHttpRequests(authz -> authz
                 // Permitir preflight OPTIONS
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/v1/pelicula/**").permitAll()
-                .requestMatchers("/api/v1/genero/**").permitAll()
                 // si quieres permitir todo /api/v1 puedes mantener la siguiente línea
+                .requestMatchers("/api/auth/**").permitAll()           // Autenticación pública
+                .requestMatchers("/api/v1/pelicula/**").permitAll()    // Películas públicas
+                .requestMatchers("/api/v1/genero/**").permitAll()      // Géneros públicos
+                .requestMatchers("/api/v1/tmdb/**").permitAll()        // TMDB sync endpoints públicos
                 .requestMatchers("/api/v1/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/v1/voto/**").permitAll()
-                // .anyRequest().authenticated()
+                // .anyRequest().authenticated()                          // Resto requiere autenticación
             );
         return http.build();
     }
