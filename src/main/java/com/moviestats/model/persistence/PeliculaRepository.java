@@ -48,21 +48,23 @@ public interface PeliculaRepository extends JpaRepository<Pelicula, Long> {
     @Query("SELECT g FROM Pelicula  g WHERE g.nombre = :pelicula AND g.idPelicula <> :id")
     Optional<Pelicula> findByNombreAndIdNot(@Param("pelicula") String pelicula, @Param("id") long id);
 
+
     
-    @Query("""
-        SELECT new com.moviestats.model.Pelicula(
-            p.nombre, 
-            p.idPelicula, 
-            p.imagen, 
-            p.fechaSalida, 
-            COALESCE(AVG(v.numero_voto), 0), 
-            COUNT(v)
-        )
-        FROM Pelicula p
-        LEFT JOIN Voto v ON v.pelicula = p
-        GROUP BY p.idPelicula
-    """)
-    List<Pelicula> findAllWithAvgAndCount();
+
+    // @Query("""
+    //     SELECT new com.moviestats.model.Pelicula(
+    //         p.nombre, 
+    //         p.idPelicula, 
+    //         p.imagen, 
+    //         p.fechaSalida, 
+    //         COALESCE(AVG(v.numero_voto), 0), 
+    //         COUNT(v)
+    //     )
+    //     FROM Pelicula p
+    //     LEFT JOIN Voto v ON v.pelicula = p
+    //     GROUP BY p.idPelicula
+    // """)
+    // List<Pelicula> findAllWithAvgAndCount();
     /**
      * Búsqueda avanzada con filtros opcionales y paginación.
      * <p>

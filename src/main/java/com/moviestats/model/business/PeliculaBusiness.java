@@ -65,7 +65,7 @@ public class PeliculaBusiness implements IPeliculaBusiness {
     @Override
     public List<Pelicula> list() throws BusinessException {
         try {
-            return peliculaDAO.findAllWithAvgAndCount();
+            return peliculaDAO.findAll();
         } catch(Exception e) {
             log.error(e.getMessage(), e);
             throw BusinessException.builder().ex(e).message(e.getMessage()).build();

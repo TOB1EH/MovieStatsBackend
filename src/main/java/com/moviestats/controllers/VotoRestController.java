@@ -3,7 +3,10 @@ package com.moviestats.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +55,7 @@ public class VotoRestController {
      *         - {@link HttpStatus#FOUND} si ya existe un voto similar ({@link FoundException}).
      *         - {@link HttpStatus#INTERNAL_SERVER_ERROR} si ocurre un {@link BusinessException}.
      */
-    @PostMapping(value = "")
+    @PostMapping(value = "/t")
     public ResponseEntity<?> add(@RequestBody Voto voto) {
         try {
             Voto response = votoBusiness.add(voto);
@@ -64,6 +67,17 @@ public class VotoRestController {
              HttpStatus.INTERNAL_SERVER_ERROR);
         } catch(FoundException e) {
             return new ResponseEntity<>(response.build(HttpStatus.FOUND, e, e.getMessage()), HttpStatus.FOUND);
+        }
+    }
+
+    @GetMapping(value = "/id-pelicula/{idPelicula}/id-usuario/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> load(@PathVariable Long idPelicula, @PathVariable Long idUsuario) {
+        try {
+            return new ResponseEntity<>(votoBusiness.loadUsuarioDTO(idUsuario, idPelicula), HttpStatus.OK);
+        } catch(BusinessException e) {
+            return new ResponseEntity<>(response.build(HttpStatus.INTERNAL_SERVER_ERROR, e, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch(NotFoundException e) {
+            return new ResponseEntity<>(response.build(HttpStatus.NOT_FOUND, e, e.getMessage()), HttpStatus.NOT_FOUND);
         }
     }
     

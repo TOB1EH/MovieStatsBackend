@@ -10,7 +10,7 @@ public class PeliculaDTO {
     private long id;
     private String title;
     private Integer year;
-    private Double rating;
+    private Float rating;
     private String poster;
     private String overview;
     private List<String> genres;
@@ -42,11 +42,11 @@ public class PeliculaDTO {
         this.year = year;
     }
 
-    public Double getRating() {
+    public Float getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Float rating) {
         this.rating = rating;
     }
 

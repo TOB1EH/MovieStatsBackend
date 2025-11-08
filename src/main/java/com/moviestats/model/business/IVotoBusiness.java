@@ -1,6 +1,7 @@
 package com.moviestats.model.business;
 import java.util.List;
 
+import com.moviestats.dto.VotoDTO;
 import com.moviestats.model.Voto;
 import com.moviestats.model.business.exceptions.*;
 
@@ -13,13 +14,6 @@ import com.moviestats.model.business.exceptions.*;
  */
 
 public interface IVotoBusiness {
-    /**
-     * Obtiene la lista completa de Votos.
-     *
-     * @return Lista de Votos existentes.
-     * @throws BusinessException Si ocurre un error general en la lógica de negocio.
-     */
-    public List<Voto> list() throws BusinessException;
 
      /**
      * Carga un Voto específico a partir de su identificador único.
@@ -29,7 +23,7 @@ public interface IVotoBusiness {
      * @throws BusinessException Si ocurre un error en la lógica de negocio.
      * @throws NotFoundException  Si no se encuentra un Voto con el identificador dado.
      */
-    public Double loadAVG(Long idPelicula) throws BusinessException, NotFoundException;
+    public Float loadAVG(Long idPelicula) throws BusinessException, NotFoundException;
 
 
          /**
@@ -62,23 +56,6 @@ public interface IVotoBusiness {
      */
     public Voto add(Voto voto) throws BusinessException, FoundException;
 
-    /**
-     * Actualiza los datos de un Voto existente.
-     *
-     * @param Voto Voto con los datos actualizados.
-     * @return Voto actualizado.
-     * @throws BusinessException Si ocurre un error en la lógica de negocio.
-     * @throws NotFoundException Si el Voto a actualizar no existe.
-     * @throws FoundException Si ya existe un Voto igual en el sistema.
-     */
-    public Voto update(Voto Voto) throws BusinessException, NotFoundException, FoundException;
+    public VotoDTO loadUsuarioDTO(Long idUsuario, Long idPelicula) throws BusinessException, NotFoundException;
 
-    /**
-     * Elimina un Voto del sistema a partir de su identificador.
-     *
-     * @param id Identificador del Voto a eliminar.
-     * @throws BusinessException Si ocurre un error en la lógica de negocio.
-     * @throws NotFoundException Si el Voto a eliminar no existe.
-     */
-    public void delete(Long id) throws BusinessException, NotFoundException;
 }
