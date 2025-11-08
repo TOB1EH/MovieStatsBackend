@@ -38,24 +38,27 @@ public class Pelicula {
     @Column(name = "id_pelicula")
     private long idPelicula;
 
-    /** Título de la película (máximo 100 caracteres) */
-    @Column(length = 100, unique = false)
+    /** Título de la película (máximo 300 caracteres para soportar títulos largos de TMDB) */
+    @Column(length = 300, unique = false)
     private String nombre;
 
     /** Duración de la película en minutos */
     private int duracion;
 
-    /** Nombre del director de la película (máximo 100 caracteres) */
-    @Column(length = 100, unique = false)
+    /** Nombre del director de la película (máximo 150 caracteres) */
+    @Column(length = 150, unique = false)
     private String director;
 
-    /** Resumen o descripción de la trama de la película */
+    /** Resumen o descripción de la trama de la película (hasta 2000 caracteres para TMDB) */
+    @Column(length = 2000)
     private String sinopsis;
 
     /** Idioma original de la película */
+    @Column(length = 50)
     private String idioma;
 
     /** Clasificación por edad (ej: PG-13, R, etc.) */
+    @Column(length = 50)
     private String clasificacion;
 
     /** Fecha de estreno de la película */
@@ -67,7 +70,8 @@ public class Pelicula {
     /** Número total de votos recibidos por la película */
     private int votos;
 
-    /** URL o ruta de la imagen del póster de la película */
+    /** URL o ruta de la imagen del póster de la película (hasta 500 caracteres para URLs largas de TMDB) */
+    @Column(length = 500)
     private String imagen;
 
     /** Lista de géneros asociados a la película (relación muchos a muchos) */
