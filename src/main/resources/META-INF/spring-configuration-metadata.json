@@ -1,0 +1,44 @@
+{
+  "properties": [
+    {
+      "name": "tmdb.api.key",
+      "type": "java.lang.String",
+      "description": "API Key de TMDB para autenticación"
+    },
+    {
+      "name": "tmdb.api.access-token",
+      "type": "java.lang.String",
+      "description": "Token de acceso de lectura para TMDB API v4"
+    },
+    {
+      "name": "tmdb.api.base-url",
+      "type": "java.lang.String",
+      "description": "URL base de la API v3 de TMDB",
+      "defaultValue": "https://api.themoviedb.org/3"
+    },
+    {
+      "name": "tmdb.image.base-url",
+      "type": "java.lang.String",
+      "description": "URL base para imágenes de TMDB",
+      "defaultValue": "https://image.tmdb.org/t/p"
+    },
+    {
+      "name": "tmdb.image.poster-size",
+      "type": "java.lang.String",
+      "description": "Tamaño de póster por defecto (w500, w780, etc.)",
+      "defaultValue": "w500"
+    },
+    {
+      "name": "tmdb.image.backdrop-size",
+      "type": "java.lang.String",
+      "description": "Tamaño de backdrop por defecto (w1280, original, etc.)",
+      "defaultValue": "w1280"
+    },
+    {
+      "name": "tmdb.api.language",
+      "type": "java.lang.String",
+      "description": "Idioma por defecto para consultas TMDB",
+      "defaultValue": "es-ES"
+    }
+  ]
+}
