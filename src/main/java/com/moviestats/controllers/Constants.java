@@ -20,9 +20,20 @@ public class Constants {
      */
     public static final String URL_BASE = URL_API + URL_API_VERSION;
 
-    public static final String URL_MOVIES2 = URL_BASE + "/peliculas";
+
+    /**
+     * URL para los endpoints relacionados con peliculas.
+     */
     public static final String URL_MOVIES = URL_BASE + "/pelicula";
 
+    /**
+     * URL para los endpoints administrativos relacionados con peliculas.
+     */
+    public static final String URL_MOVIES_ADMIN = URL_BASE + "/admin/pelicula";
+
+    /**
+     * URL para los endpoints relacionados con votos.
+     */
     public static final String URL_VOTOS = URL_BASE + "/voto";
 
 }

@@ -55,7 +55,7 @@ public class VotoRestController {
      *         - {@link HttpStatus#FOUND} si ya existe un voto similar ({@link FoundException}).
      *         - {@link HttpStatus#INTERNAL_SERVER_ERROR} si ocurre un {@link BusinessException}.
      */
-    @PostMapping(value = "/t")
+    @PostMapping(value = "/numero")
     public ResponseEntity<?> add(@RequestBody Voto voto) {
         try {
             Voto response = votoBusiness.add(voto);

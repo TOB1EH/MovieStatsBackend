@@ -1,18 +1,14 @@
 package com.moviestats.model.business;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.moviestats.dto.VotoDTO;
 import com.moviestats.model.Pelicula;
 import com.moviestats.model.Voto;
 import com.moviestats.model.business.exceptions.*;
 import com.moviestats.model.persistence.VotoRepository;
-
 import java.util.Optional;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -112,27 +108,6 @@ public class VotoBusiness implements IVotoBusiness{
         try {
             // carga la película (verifica existencia)
             Pelicula pelicula = peliculaBusiness.load(voto.getPelicula().getIdPelicula());
-
-            // Intento de actualizar avg y count (si hay votos)
-            try {
-                Float avg = loadAVG(voto.getPelicula().getIdPelicula());
-                Integer cnt = loadCOUNT(voto.getPelicula().getIdPelicula());
-                pelicula.setPuntuacion(avg);
-                pelicula.setVotos(cnt);
-            } catch (NotFoundException e) {
-                // si no hay votos todavía, los dejamos en null/0 según tu modelo
-                pelicula.setPuntuacion(null);
-                pelicula.setVotos(0);
-            }
-
-            // Persistir la película con los valores actualizados (para que la tabla MOVIES refleje los nuevos valores)
-            try {
-                peliculaBusiness.update(pelicula);
-            } catch (FoundException | BusinessException e) {
-                // No esperamos FoundException al actualizar el mismo registro,
-                // pero si ocurre lo logueamos y seguimos (no bloqueamos la creación del voto)
-                log.warn("No pude actualizar la película tras calcular avg/count: " + e.getMessage());
-            }
 
             // CORRECCIÓN: orden correcto (idUsuario, idPelicula)
             try {

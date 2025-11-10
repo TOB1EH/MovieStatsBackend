@@ -1,5 +1,4 @@
 package com.moviestats.model.business;
-import java.util.List;
 
 import com.moviestats.dto.VotoDTO;
 import com.moviestats.model.Voto;

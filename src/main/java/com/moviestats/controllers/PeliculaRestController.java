@@ -30,7 +30,7 @@ import com.moviestats.model.business.IPeliculaBusiness;
  * </p>
  */
 @RestController
-@RequestMapping(Constants.URL_MOVIES2)
+@RequestMapping(Constants.URL_MOVIES)
 public class PeliculaRestController {
 
     /**
